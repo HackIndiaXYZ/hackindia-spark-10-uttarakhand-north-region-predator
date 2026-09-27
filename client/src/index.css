@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* App Background: Soft off-white (Slate 50) */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    /* Cards: Pure White */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    /* Borders: Soft Slate */
+    --border: 214 32% 91%;
+
+    /* Primary Accent: Energetic Orange (Matches Reference Image) */
+    --primary: 25 95% 53%;
+    /* #f97316 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary/Muted elements */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+body {
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(215 20% 82%);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(215 20% 70%);
+}
+
+/* Smooth focus for all interactive elements */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Animation classes used by the app */
+@keyframes slide-in-from-bottom-5 {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes zoom-in-95 {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-in {
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-in-from-bottom-5 { animation-name: slide-in-from-bottom-5; }
+.slide-in-from-left-4 { animation-name: slide-in-from-bottom-5; }
+.slide-in-from-right-4 { animation-name: slide-in-from-bottom-5; }
+.fade-in { animation-name: fade-in; }
+.zoom-in-95 { animation-name: zoom-in-95; }

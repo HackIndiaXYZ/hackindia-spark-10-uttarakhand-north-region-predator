@@ -1,0 +1,93 @@
+.magnetic-gallery-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 4rem 2rem;
+  overflow: visible;
+}
+
+.-w {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.mag-figure {
+  position: relative;
+  width: clamp(150px, 18vw, 220px);
+  aspect-ratio: 3/4;
+  margin: -1.5rem; /* create overlap */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 15px 35px -5px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.4) inset;
+  background-color: #f1f5f9;
+  
+  transform: translate(calc(var(--magnetic-x) * 0.5%), calc(var(--magnetic-y) * 0.5%)) 
+             rotateX(calc(var(--magnetic-y) * -0.3deg)) 
+             rotateY(calc(var(--magnetic-x) * 0.3deg));
+             
+  scale: 0.95;
+  translate: 0 0;
+  rotate: var(--tilt, 0deg);
+  transition: scale 0.7s cubic-bezier(0.86, 0, 0.31, 1), 
+              rotate 0.7s cubic-bezier(0.86, 0, 0.31, 1), 
+              translate 0.7s cubic-bezier(0.86, 0, 0.31, 1),
+              filter 0.7s cubic-bezier(0.86, 0, 0.31, 1);
+  will-change: transform, translate, rotate, scale, filter;
+}
+
+.mag-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.img-1 { --tilt: -12deg; z-index: 11; }
+.img-2 { --tilt: 8deg; z-index: 12; }
+.img-3 { --tilt: -5deg; z-index: 13; }
+.img-4 { --tilt: 14deg; z-index: 14; }
+.img-5 { --tilt: -8deg; z-index: 15; }
+.img-6 { --tilt: 6deg; z-index: 16; }
+.img-7 { --tilt: -15deg; z-index: 17; }
+.img-8 { --tilt: 10deg; z-index: 18; }
+
+@media (min-width: 1024px) {
+  .mag-figure:hover {
+    transition: scale 0.5s cubic-bezier(0.35, 0.35, 0, 1), 
+                rotate 0.5s cubic-bezier(0.35, 0.35, 0, 1), 
+                translate 0.5s cubic-bezier(0.35, 0.35, 0, 1),
+                filter 0.5s cubic-bezier(0.35, 0.35, 0, 1),
+                box-shadow 0.5s cubic-bezier(0.35, 0.35, 0, 1);
+  }
+
+  .-w:has(.mag-figure:hover) .mag-figure {
+    scale: 0.85;
+    filter: brightness(0.6) blur(3px);
+  }
+
+  /* Specific scatters when container hovered */
+  .-w:has(.mag-figure:hover) .img-1 { translate: -15% -10%; rotate: -20deg; }
+  .-w:has(.mag-figure:hover) .img-2 { translate: 0% -15%; rotate: -5deg; }
+  .-w:has(.mag-figure:hover) .img-3 { translate: 10% -10%; rotate: 15deg; }
+  .-w:has(.mag-figure:hover) .img-4 { translate: 20% 0%; rotate: 25deg; }
+  .-w:has(.mag-figure:hover) .img-5 { translate: -20% 10%; rotate: -25deg; }
+  .-w:has(.mag-figure:hover) .img-6 { translate: -10% 15%; rotate: -10deg; }
+  .-w:has(.mag-figure:hover) .img-7 { translate: 0% 20%; rotate: 5deg; }
+  .-w:has(.mag-figure:hover) .img-8 { translate: 15% 15%; rotate: 20deg; }
+
+  /* The hovered element overrides everything */
+  .-w:has(.mag-figure:hover) .mag-figure:hover {
+    scale: 1.15;
+    rotate: 0deg !important;
+    translate: 0 -15% !important;
+    z-index: 50;
+    filter: brightness(1.1) blur(0px);
+    box-shadow: 0 40px 80px -15px rgba(0,0,0,0.4), 0 0 0 2px rgba(255,255,255,0.8) inset;
+  }
+}

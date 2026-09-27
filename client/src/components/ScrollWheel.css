@@ -1,0 +1,46 @@
+@property --progress {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.-w-wheel {
+  height: calc(100vh * 1.5); /* Reduced further to eliminate extra blank scroll space */
+  contain: paint;
+  position: relative;
+  background-color: transparent;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.-w-wheel div.wheel-content {
+  display: grid;
+  margin-left: 50%;
+  position: sticky;
+  top: 65vh; /* Shifted down from 50vh */
+  transform-origin: 0 50%;
+  rotate: calc( 3 * -360deg * var(--progress) );
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.-w-wheel div.wheel-content > span {
+  grid-area: 1/1;
+  display: block;
+  text-transform: uppercase;
+  transform-origin: 0% 50%;
+  transform: rotate(calc(var(--order) * 360deg / var(--total))) translate( calc( var(--total) * 0.4em), 0);
+}
+
+.-w-wheel div.wheel-content > span:first-child {
+  color: #f97316;
+}
+
+/* string-split generated char wrappers */
+.-w-wheel .-s-char {
+  rotate: calc( pow(var(--char-index),1.75) * var(--lerp) * 0.1deg);
+  translate: calc( pow(var(--char-index),1.75) * abs(var(--lerp)) * -0.00125em ) calc( pow(var(--char-index),1.75) * var(--lerp) * 0.0025em );
+  display: inline-flex;
+  will-change: transform, rotate, translate;
+}
