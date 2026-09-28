@@ -29,4 +29,16 @@ router.post('/:bookingId', requireAuth, async (req, res) => {
   } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
+// Mark messages as read
+router.patch('/:bookingId/read', requireAuth, async (req, res) => {
+  try {
+    await db.query(
+      `UPDATE messages SET is_read = true 
+       WHERE booking_id = $1 AND receiver_id = $2 AND is_read = false`,
+      [req.params.bookingId, req.user.id]
+    );
+    res.json({ success: true });
+  } catch (err) { res.status(500).json({ error: 'Server error' }); }
+});
+
 module.exports = router;

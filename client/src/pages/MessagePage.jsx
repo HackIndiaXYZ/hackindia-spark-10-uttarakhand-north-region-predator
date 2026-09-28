@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Send, ShieldCheck, Clock, Lock } from 'lucide-react';
+import { ArrowLeft, Send, ShieldCheck, Clock, Lock, Check, CheckCheck } from 'lucide-react';
 
 export default function MessagePage() {
   const location = useLocation();
@@ -31,7 +31,13 @@ export default function MessagePage() {
       const res = await fetch(`https://rahi-backend-gct8.onrender.com/api/messages/${bookingId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      if (res.ok) setMessages(await res.json());
+      if (res.ok) {
+        setMessages(await res.json());
+        fetch(`https://rahi-backend-gct8.onrender.com/api/messages/${bookingId}/read`, {
+          method: 'PATCH',
+          headers: { 'Authorization': `Bearer ${token}` }
+        }).catch(() => {});
+      }
     } catch (e) {}
   };
 
@@ -100,7 +106,10 @@ export default function MessagePage() {
               </div>
               <span className="text-[10px] text-slate-400 mt-1 px-1 flex items-center gap-1 font-medium">
                 <Clock className="size-3" />
-                {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {new Date(msg.created_at + (msg.created_at.includes('Z') ? '' : 'Z')).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {isMe && (
+                  msg.is_read ? <CheckCheck className="size-3.5 text-blue-500 ml-1" /> : <Check className="size-3.5 text-slate-400 ml-1" />
+                )}
               </span>
             </div>
           );
