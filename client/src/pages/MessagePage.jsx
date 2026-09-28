@@ -99,6 +99,10 @@ export default function MessagePage() {
 
         {messages.map((msg, idx) => {
           const isMe = msg.sender_id === currentUserId;
+          let dateStr = msg.created_at;
+          if (dateStr.includes(' ')) dateStr = dateStr.replace(' ', 'T');
+          if (!dateStr.includes('Z')) dateStr += 'Z';
+          
           return (
             <div key={idx} className={`flex flex-col max-w-[75%] ${isMe ? 'self-end ml-auto items-end' : 'self-start mr-auto items-start'}`}>
               <div className={`px-4 py-2.5 rounded-2xl text-sm shadow-sm ${isMe ? 'bg-orange-500 text-white rounded-br-sm' : 'bg-white text-slate-900 rounded-bl-sm border border-slate-100'}`}>
@@ -106,7 +110,7 @@ export default function MessagePage() {
               </div>
               <span className="text-[10px] text-slate-400 mt-1 px-1 flex items-center gap-1 font-medium">
                 <Clock className="size-3" />
-                {new Date(msg.created_at + (msg.created_at.includes('Z') ? '' : 'Z')).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 {isMe && (
                   msg.is_read ? <CheckCheck className="size-3.5 text-blue-500 ml-1" /> : <Check className="size-3.5 text-slate-400 ml-1" />
                 )}
