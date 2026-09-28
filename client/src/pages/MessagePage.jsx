@@ -6,9 +6,9 @@ export default function MessagePage() {
   const location = useLocation();
   const navigate = useNavigate();
   const bottomRef = useRef(null);
-  
+
   const { bookingId, partnerId, partnerName, rideType } = location.state || {};
-  
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [currentUserId, setCurrentUserId] = useState(null);
@@ -36,9 +36,9 @@ export default function MessagePage() {
         fetch(`https://rahi-backend-gct8.onrender.com/api/messages/${bookingId}/read`, {
           method: 'PATCH',
           headers: { 'Authorization': `Bearer ${token}` }
-        }).catch(() => {});
+        }).catch(() => { });
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function MessagePage() {
       });
       setInput('');
       fetchMessages();
-    } catch (e) {}
+    } catch (e) { }
   };
 
   return (
@@ -102,7 +102,7 @@ export default function MessagePage() {
           let dateStr = msg.created_at;
           if (dateStr.includes(' ')) dateStr = dateStr.replace(' ', 'T');
           if (!dateStr.includes('Z')) dateStr += 'Z';
-          
+
           return (
             <div key={idx} className={`flex flex-col max-w-[75%] ${isMe ? 'self-end ml-auto items-end' : 'self-start mr-auto items-start'}`}>
               <div className={`px-4 py-2.5 rounded-2xl text-sm shadow-sm ${isMe ? 'bg-orange-500 text-white rounded-br-sm' : 'bg-white text-slate-900 rounded-bl-sm border border-slate-100'}`}>
@@ -124,11 +124,11 @@ export default function MessagePage() {
       {/* INPUT AREA */}
       <div className="bg-white/70 backdrop-blur-xl border-t border-white/60 p-4 pb-8 sm:pb-4 shadow-[0_-4px_20px_rgb(0,0,0,0.03)]">
         <form onSubmit={sendMessage} className="flex items-center gap-2 max-w-4xl mx-auto">
-          <input 
-            type="text" 
-            value={input} 
-            onChange={(e) => setInput(e.target.value)} 
-            placeholder="Type a message..." 
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type a message..."
             className="flex-1 h-12 rounded-full border border-slate-200 bg-white text-slate-900 px-5 text-sm font-medium outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-sm placeholder:text-slate-400"
           />
           <button type="submit" disabled={!input.trim()} className="flex size-12 shrink-0 items-center justify-center rounded-full bg-orange-500 text-white transition hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-500/25">
