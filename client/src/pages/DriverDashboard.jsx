@@ -816,11 +816,11 @@ export default function DriverDashboard() {
             </div>
             <div className="p-6">
               <div className="space-y-4 mb-6">
-                <button onClick={() => purchaseSubscription('Weekly Pass')} disabled={isUpdating} className="w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-primary transition-colors group">
+                <button onClick={() => purchaseSubscription('Daily Pass')} disabled={isUpdating} className="w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-primary transition-colors group">
                   <div className="flex justify-between items-center">
                     <div>
-                      <p className="font-black text-slate-900 group-hover:text-primary transition-colors">Weekly Pass</p>
-                      <p className="text-xs text-slate-500 mt-1">₹399 / week</p>
+                      <p className="font-black text-slate-900 group-hover:text-primary transition-colors">Daily Pass</p>
+                      <p className="text-xs text-slate-500 mt-1">₹15 / day</p>
                     </div>
                     <ArrowRight className="size-5 text-slate-300 group-hover:text-primary transition-colors" />
                   </div>
@@ -832,7 +832,7 @@ export default function DriverDashboard() {
                         <p className="font-black text-primary">Monthly Pass</p>
                         <span className="text-[9px] font-black uppercase tracking-wider bg-primary text-white px-2 py-0.5 rounded-md">Best Value</span>
                       </div>
-                      <p className="text-xs text-slate-600 mt-1">₹1,299 / month</p>
+                      <p className="text-xs text-slate-600 mt-1">₹399 / month</p>
                     </div>
                     <ArrowRight className="size-5 text-primary" />
                   </div>
