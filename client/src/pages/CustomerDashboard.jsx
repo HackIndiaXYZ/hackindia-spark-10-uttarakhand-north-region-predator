@@ -183,7 +183,7 @@ export default function CustomerDashboard() {
             <button onClick={() => navigate('/customer/settings')} className="flex size-10 items-center justify-center rounded-full bg-white text-slate-800 ring-1 ring-slate-200 hover:ring-primary transition-all font-black text-xs uppercase shadow-md hover:shadow-lg">
               {userProfile.name !== 'Loading...' ? userProfile.name.substring(0, 2) : '..'}
             </button>
-            <button className="rounded-lg p-2 text-slate-600 md:hidden hover:bg-slate-100 hover:text-slate-900 transition-colors"><Menu className="size-5" /></button>
+            
           </div>
         </div>
       </header>

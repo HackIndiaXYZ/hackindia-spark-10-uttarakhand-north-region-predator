@@ -212,7 +212,7 @@ export default function AdminDashboard() {
       <div className="min-w-0 flex-1 flex flex-col max-h-screen overflow-y-auto">
         <header className="flex h-20 shrink-0 items-center justify-between border-b border-white/60 bg-white/50 backdrop-blur-xl sticky top-0 z-30 px-5 sm:px-8 shadow-sm">
           <div className="flex items-center gap-4">
-            <button className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors lg:hidden" onClick={() => setSidebarOpen(true)}><Menu className="size-5" /></button>
+            
             <div>
               <p className="text-xs font-black uppercase tracking-wider text-slate-400">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
               <h1 className="text-xl font-black tracking-tight sm:text-2xl text-slate-900">Good morning, {adminProfile.name.split(' ')[0]}</h1>

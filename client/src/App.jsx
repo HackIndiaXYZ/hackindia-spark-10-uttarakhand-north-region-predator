@@ -17,6 +17,7 @@ import Home from './pages/Home';
 import SupportPage from './pages/SupportPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
+import GlobalMobileNav from './components/GlobalMobileNav';
 
 // Advanced Bouncer: Checks token existence AND user role
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -50,6 +51,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 function App() {
   return (
     <Router>
+      <GlobalMobileNav />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
