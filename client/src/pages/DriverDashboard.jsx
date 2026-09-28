@@ -441,7 +441,8 @@ export default function DriverDashboard() {
 
             {/* Animated Car on Road above Telemetry */}
             <div className="relative mt-10 mb-6">
-              <style dangerouslySetInnerHTML={{__html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes dashDrive {
                   0% { left: -60px; opacity: 0; }
                   5% { opacity: 1; }
@@ -486,7 +487,7 @@ export default function DriverDashboard() {
                   <Car className="size-6 text-orange-500 fill-orange-400" />
                 </div>
               </div>
-              
+
               <RouteIntelWidget pickup={activeRide?.pickup || ''} destination={activeRide?.destination || ''} role="DRIVER" />
             </div>
 
@@ -526,7 +527,10 @@ export default function DriverDashboard() {
                               <span className="mb-2 inline-flex rounded-md bg-slate-100 border border-slate-200 px-2.5 py-1 text-[10px] font-black text-slate-600 uppercase tracking-wider shadow-sm">
                                 {request?.booking_type || request?.bookingType || 'Private'} ride
                               </span>
-                              <p className="text-2xl font-black text-slate-900 mt-1">{request?.price ? `₹${request.price}` : `₹${(request?.passengers || 1) * 250}`}</p>
+                              <div className="flex items-center gap-2 mt-1">
+                                <MessageSquare className="size-4 text-orange-500" />
+                                <p className="text-sm font-black text-slate-800">Discuss price in chat</p>
+                              </div>
                             </div>
                             <div className="bg-primary/10 border border-primary/20 p-2.5 rounded-full shadow-sm">
                               <ShieldCheck className="size-5 text-primary" />
@@ -798,7 +802,7 @@ export default function DriverDashboard() {
       </div>
 
       {/* --- MODALS --- */}
-      
+
       {/* 1. SUBSCRIPTION MODAL */}
       {showSubModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
@@ -832,7 +836,7 @@ export default function DriverDashboard() {
                         <p className="font-black text-primary">Monthly Pass</p>
                         <span className="text-[9px] font-black uppercase tracking-wider bg-primary text-white px-2 py-0.5 rounded-md">Best Value</span>
                       </div>
-                      <p className="text-xs text-slate-600 mt-1">₹399 / month</p>
+                      <p className="text-xs text-slate-600 mt-1">₹299 / month</p>
                     </div>
                     <ArrowRight className="size-5 text-primary" />
                   </div>
@@ -858,25 +862,25 @@ export default function DriverDashboard() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Boarding Point</label>
-                  <input type="text" required value={poolForm.boardingPoint} onChange={e => setPoolForm({...poolForm, boardingPoint: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" placeholder="e.g. Haldwani" />
+                  <input type="text" required value={poolForm.boardingPoint} onChange={e => setPoolForm({ ...poolForm, boardingPoint: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" placeholder="e.g. Haldwani" />
                 </div>
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Destination</label>
-                  <input type="text" required value={poolForm.destination} onChange={e => setPoolForm({...poolForm, destination: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" placeholder="e.g. Nainital" />
+                  <input type="text" required value={poolForm.destination} onChange={e => setPoolForm({ ...poolForm, destination: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" placeholder="e.g. Nainital" />
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Depart Time</label>
-                  <input type="time" required value={poolForm.departTime} onChange={e => setPoolForm({...poolForm, departTime: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" />
+                  <input type="time" required value={poolForm.departTime} onChange={e => setPoolForm({ ...poolForm, departTime: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" />
                 </div>
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Seats</label>
-                  <input type="number" min="1" max="10" required value={poolForm.seats} onChange={e => setPoolForm({...poolForm, seats: Number(e.target.value)})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" />
+                  <input type="number" min="1" max="10" required value={poolForm.seats} onChange={e => setPoolForm({ ...poolForm, seats: Number(e.target.value) })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" />
                 </div>
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Price (₹)</label>
-                  <input type="number" required value={poolForm.price} onChange={e => setPoolForm({...poolForm, price: Number(e.target.value)})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" />
+                  <input type="number" required value={poolForm.price} onChange={e => setPoolForm({ ...poolForm, price: Number(e.target.value) })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-primary text-sm font-medium" />
                 </div>
               </div>
               <button type="submit" className="w-full h-12 bg-primary text-white rounded-xl font-black shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors mt-6">
@@ -909,25 +913,25 @@ export default function DriverDashboard() {
             <form onSubmit={submitTourPackage} className="p-6 space-y-4">
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Package Title</label>
-                <input type="text" required value={tourForm.title} onChange={e => setTourForm({...tourForm, title: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. Kedarnath Yatra Express" />
+                <input type="text" required value={tourForm.title} onChange={e => setTourForm({ ...tourForm, title: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. Kedarnath Yatra Express" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Duration</label>
-                  <input type="text" required value={tourForm.duration} onChange={e => setTourForm({...tourForm, duration: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. 3 Days, 2 Nights" />
+                  <input type="text" required value={tourForm.duration} onChange={e => setTourForm({ ...tourForm, duration: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. 3 Days, 2 Nights" />
                 </div>
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Total Price (₹)</label>
-                  <input type="number" required value={tourForm.price} onChange={e => setTourForm({...tourForm, price: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. 15000" />
+                  <input type="number" required value={tourForm.price} onChange={e => setTourForm({ ...tourForm, price: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. 15000" />
                 </div>
               </div>
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Route Points</label>
-                <input type="text" required value={tourForm.route} onChange={e => setTourForm({...tourForm, route: e.target.value})} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. Haridwar -> Rishikesh -> Kedarnath" />
+                <input type="text" required value={tourForm.route} onChange={e => setTourForm({ ...tourForm, route: e.target.value })} className="w-full h-11 px-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium" placeholder="e.g. Haridwar -> Rishikesh -> Kedarnath" />
               </div>
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Itinerary / Description</label>
-                <textarea required value={tourForm.description} onChange={e => setTourForm({...tourForm, description: e.target.value})} className="w-full h-24 p-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium resize-none" placeholder="Enter trip details..." />
+                <textarea required value={tourForm.description} onChange={e => setTourForm({ ...tourForm, description: e.target.value })} className="w-full h-24 p-3 rounded-xl border border-slate-200 outline-none focus:border-emerald-500 text-sm font-medium resize-none" placeholder="Enter trip details..." />
               </div>
               <button type="submit" className="w-full h-12 bg-emerald-500 text-white rounded-xl font-black shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 transition-colors mt-2">
                 Publish Tour Package
