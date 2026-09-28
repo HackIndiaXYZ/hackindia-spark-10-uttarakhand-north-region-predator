@@ -63,7 +63,7 @@ export default function RouteIntelWidget({ pickup, destination, role = 'CUSTOMER
     const fetchRouteTelemetry = async () => {
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:5000/api/ai/route-intel', {
+        const res = await fetch('https://rahi-backend-gct8.onrender.com/api/ai/route-intel', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pickup, destination, role: viewMode })

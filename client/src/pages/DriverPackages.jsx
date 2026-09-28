@@ -36,18 +36,18 @@ export default function DriverPackages() {
       const token = localStorage.getItem('token') || TEST_TOKEN;
       if (!token) return navigate('/');
 
-      const meRes = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+      const meRes = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
       const meData = await meRes.json();
       const userId = meData.user?.id;
       if (userId) setUserProfile(meData.user);
 
-      const pkgRes = await fetch('http://localhost:5000/api/packages');
+      const pkgRes = await fetch('https://rahi-backend-gct8.onrender.com/api/packages');
       if (pkgRes.ok) {
         const allPkgs = await pkgRes.json();
         setMyCatalog(allPkgs.filter(p => p.driver_id === userId));
       }
 
-      const bkgRes = await fetch('http://localhost:5000/api/bookings/driver-requests', {
+      const bkgRes = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/driver-requests', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (bkgRes.ok) {
@@ -72,7 +72,7 @@ export default function DriverPackages() {
     setIsUpdating(true);
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
-      const response = await fetch(`http://localhost:5000/api/bookings/${id}/status`, {
+      const response = await fetch(`https://rahi-backend-gct8.onrender.com/api/bookings/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ status: newStatus })
@@ -92,7 +92,7 @@ export default function DriverPackages() {
     setIsUpdating(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/packages/${pkgId}`, {
+      const response = await fetch(`https://rahi-backend-gct8.onrender.com/api/packages/${pkgId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

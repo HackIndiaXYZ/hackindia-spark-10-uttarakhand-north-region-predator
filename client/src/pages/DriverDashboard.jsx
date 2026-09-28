@@ -76,7 +76,7 @@ export default function DriverDashboard() {
       try {
         const token = localStorage.getItem('token');
         if (!token) return navigate('/');
-        const res = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+        const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
         const data = await res.json();
         if (res.ok && data.user) {
           setDriverProfile({
@@ -96,7 +96,7 @@ export default function DriverDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const res = await fetch('http://localhost:5000/api/pools/my-active', { headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/pools/my-active', { headers: { 'Authorization': `Bearer ${token}` } });
       if (res.ok) {
         const data = await res.json();
         setActivePool(data.pool);
@@ -126,7 +126,7 @@ export default function DriverDashboard() {
     if (!driverProfile.is_subscribed) { setShowSubModal(true); return; }
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/pools', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/pools', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({
@@ -155,7 +155,7 @@ export default function DriverDashboard() {
     setNotice("AI is crafting your package...");
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/ai/generate-tour', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/ai/generate-tour', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ title: tourForm.title, duration: tourForm.duration, description: tourForm.description })
@@ -182,7 +182,7 @@ export default function DriverDashboard() {
     if (!driverProfile.is_subscribed) { setShowSubModal(true); return; }
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/packages', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/packages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(tourForm)
@@ -200,7 +200,7 @@ export default function DriverDashboard() {
     if (!activePool) return;
     try {
       const token = localStorage.getItem('token');
-      await fetch(`http://localhost:5000/api/pools/${activePool.id}/end`, {
+      await fetch(`https://rahi-backend-gct8.onrender.com/api/pools/${activePool.id}/end`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -213,7 +213,7 @@ export default function DriverDashboard() {
   const saveDriverSettings = async (updates) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/auth/settings', {
+      const response = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(updates)
@@ -235,7 +235,7 @@ export default function DriverDashboard() {
     setTimeout(async () => {
       try {
         const token = localStorage.getItem('token');
-        await fetch('http://localhost:5000/api/auth/settings', {
+        await fetch('https://rahi-backend-gct8.onrender.com/api/auth/settings', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
           body: JSON.stringify({ is_subscribed: true })
@@ -258,7 +258,7 @@ export default function DriverDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return navigate('/');
-      const response = await fetch('http://localhost:5000/api/bookings/driver-requests', {
+      const response = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/driver-requests', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
@@ -297,7 +297,7 @@ export default function DriverDashboard() {
     setIsUpdating(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/bookings/${id}/status`, {
+      const response = await fetch(`https://rahi-backend-gct8.onrender.com/api/bookings/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ status: statusAction })
@@ -316,7 +316,7 @@ export default function DriverDashboard() {
     setIsUpdating(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/bookings/${activeRide.id}/status`, {
+      const response = await fetch(`https://rahi-backend-gct8.onrender.com/api/bookings/${activeRide.id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ status: newStatus })

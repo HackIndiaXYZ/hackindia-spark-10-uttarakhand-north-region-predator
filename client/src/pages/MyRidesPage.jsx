@@ -27,7 +27,7 @@ export default function MyRidesPage() {
   const fetchMyRides = async () => {
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
-      const response = await fetch('http://localhost:5000/api/bookings/my', {
+      const response = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/my', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -68,7 +68,7 @@ export default function MyRidesPage() {
     if (!rideId) return;
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
-      const response = await fetch(`http://localhost:5000/api/bookings/${rideId}/status`, {
+      const response = await fetch(`https://rahi-backend-gct8.onrender.com/api/bookings/${rideId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ status: 'CANCELLED' })

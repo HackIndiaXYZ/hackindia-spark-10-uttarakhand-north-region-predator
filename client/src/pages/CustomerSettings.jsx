@@ -35,7 +35,7 @@ export default function CustomerSettings() {
       try {
         const token = localStorage.getItem('token') || TEST_TOKEN;
         if (!token) return navigate('/');
-        const res = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+        const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
         const data = await res.json();
         if (res.ok && data.user) {
           setProfile({
@@ -74,7 +74,7 @@ export default function CustomerSettings() {
     setIsSaving(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/auth/settings', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ name: profile.name, phone: profile.phone })
@@ -90,7 +90,7 @@ export default function CustomerSettings() {
     setIsSaving(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/auth/settings', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ 

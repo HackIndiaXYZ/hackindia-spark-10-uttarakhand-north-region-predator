@@ -17,7 +17,7 @@ export default function MessagePage() {
     if (!bookingId) navigate(-1);
     const fetchUser = async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
       const data = await res.json();
       if (data.user) setCurrentUserId(data.user.id);
     };
@@ -28,7 +28,7 @@ export default function MessagePage() {
     if (!bookingId) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/messages/${bookingId}`, {
+      const res = await fetch(`https://rahi-backend-gct8.onrender.com/api/messages/${bookingId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) setMessages(await res.json());
@@ -50,7 +50,7 @@ export default function MessagePage() {
     if (!input.trim()) return;
     try {
       const token = localStorage.getItem('token');
-      await fetch(`http://localhost:5000/api/messages/${bookingId}`, {
+      await fetch(`https://rahi-backend-gct8.onrender.com/api/messages/${bookingId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ receiverId: partnerId, content: input })

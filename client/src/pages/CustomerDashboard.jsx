@@ -77,7 +77,7 @@ export default function CustomerDashboard() {
       try {
         const token = localStorage.getItem('token');
         if (!token) return navigate('/');
-        const res = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+        const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
         const data = await res.json();
         if (res.ok && data.user) setUserProfile(data.user);
       } catch (err) { }
@@ -88,7 +88,7 @@ export default function CustomerDashboard() {
   const fetchMyRides = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/bookings/my', { headers: { 'Authorization': `Bearer ${token}` } });
+      const response = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/my', { headers: { 'Authorization': `Bearer ${token}` } });
       if (response.ok) {
         const result = await response.json();
         setMyRides(Array.isArray(result) ? result : (result?.data || result?.bookings || []));
@@ -107,7 +107,7 @@ export default function CustomerDashboard() {
     setIsAiLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/ai/parse-booking', {
+      const response = await fetch('https://rahi-backend-gct8.onrender.com/api/ai/parse-booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ text: prompt })
@@ -132,7 +132,7 @@ export default function CustomerDashboard() {
     event.preventDefault()
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const response = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({

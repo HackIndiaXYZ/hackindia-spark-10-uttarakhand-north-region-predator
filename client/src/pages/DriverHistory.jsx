@@ -26,7 +26,7 @@ export default function DriverHistory() {
       try {
         const token = localStorage.getItem('token');
         if (!token) return navigate('/');
-        const response = await fetch('http://localhost:5000/api/bookings/driver-requests', {
+        const response = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/driver-requests', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {

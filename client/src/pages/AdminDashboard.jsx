@@ -34,7 +34,7 @@ export default function AdminDashboard() {
         const token = localStorage.getItem('token');
         if (!token) return navigate('/');
         
-        const res = await fetch('http://localhost:5000/api/auth/me', {
+        const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -56,7 +56,7 @@ export default function AdminDashboard() {
   const fetchAdminData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/admin/dashboard', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/admin/dashboard', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -83,7 +83,7 @@ export default function AdminDashboard() {
     setIsSaving(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/auth/settings', {
+      const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ name: adminProfile.name })
@@ -121,7 +121,7 @@ export default function AdminDashboard() {
   const handleDriverAction = async (driverId, action) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/admin/drivers/${driverId}/status`, {
+      const res = await fetch(`https://rahi-backend-gct8.onrender.com/api/admin/drivers/${driverId}/status`, {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json', 

@@ -23,7 +23,7 @@ export default function CustomerPackages() {
       try {
         const token = localStorage.getItem('token') || TEST_TOKEN;
         if (!token) return navigate('/');
-        const res = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+        const res = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
         const data = await res.json();
         if (res.ok && data.user) setUserProfile(data.user);
       } catch (err) {}
@@ -34,10 +34,10 @@ export default function CustomerPackages() {
   const fetchAllData = async () => {
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
-      const pkgRes = await fetch('http://localhost:5000/api/packages');
+      const pkgRes = await fetch('https://rahi-backend-gct8.onrender.com/api/packages');
       if (pkgRes.ok) setAvailablePackages(await pkgRes.json());
 
-      const histRes = await fetch('http://localhost:5000/api/bookings/my', { headers: { 'Authorization': `Bearer ${token}` } });
+      const histRes = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/my', { headers: { 'Authorization': `Bearer ${token}` } });
       if (histRes.ok) {
         const result = await histRes.json();
         let safeArray = Array.isArray(result) ? result : (result.data || result.bookings || []);
@@ -62,7 +62,7 @@ export default function CustomerPackages() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
-      const response = await fetch(`http://localhost:5000/api/bookings/${reviewModal.bookingId}/status`, {
+      const response = await fetch(`https://rahi-backend-gct8.onrender.com/api/bookings/${reviewModal.bookingId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ rating, review: reviewText })

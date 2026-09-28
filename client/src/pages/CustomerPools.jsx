@@ -20,14 +20,14 @@ export default function CustomerPools() {
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
       
-      const meRes = await fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
+      const meRes = await fetch('https://rahi-backend-gct8.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } });
       const meData = await meRes.json();
       if (meRes.ok && meData.user) setUserProfile(meData.user);
 
-      const poolRes = await fetch('http://localhost:5000/api/pools');
+      const poolRes = await fetch('https://rahi-backend-gct8.onrender.com/api/pools');
       if (poolRes.ok) setLivePools(await poolRes.json());
 
-      const histRes = await fetch('http://localhost:5000/api/bookings/my', { headers: { 'Authorization': `Bearer ${token}` } });
+      const histRes = await fetch('https://rahi-backend-gct8.onrender.com/api/bookings/my', { headers: { 'Authorization': `Bearer ${token}` } });
       if (histRes.ok) {
         const result = await histRes.json();
         setMyRides(Array.isArray(result) ? result : (result.data || result.bookings || []));
@@ -45,7 +45,7 @@ export default function CustomerPools() {
     setIsPoolBooking(true);
     try {
       const token = localStorage.getItem('token') || TEST_TOKEN;
-      const res = await fetch(`http://localhost:5000/api/pools/${pool.id}/join`, {
+      const res = await fetch(`https://rahi-backend-gct8.onrender.com/api/pools/${pool.id}/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ seats: poolSeats })
