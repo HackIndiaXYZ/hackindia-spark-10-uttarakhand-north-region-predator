@@ -1,12 +1,32 @@
 const db = require('../config/db');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const createBooking = async (req, res) => {
   try {
     const customerId = req.user.id;
-    const { pickup, destination, date, time, passengers, bookingType, vehicleId, driverId, price } = req.body;
+    let { pickup, destination, date, time, passengers, bookingType, vehicleId, driverId, price } = req.body;
 
     if (!pickup || !destination || !date || !time || !passengers || !bookingType) {
       return res.status(400).json({ message: 'Please provide all required booking fields' });
+    }
+
+    // AI Pricing Engine for standard rides if price isn't set
+    if (!price && bookingType !== 'PACKAGE') {
+      try {
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.5-flash-lite' });
+        const prompt = `Calculate a realistic and fair taxi fare in Indian Rupees (INR) for a trip from ${pickup} to ${destination} in Uttarakhand, India for ${passengers} passengers. Consider the hilly terrain, distance, and local rates (usually ₹15-20 per km). Respond ONLY with a pure integer number representing the total price. No symbols, no text. Just the number. If you don't know, estimate based on average 3 hour hill journey (e.g. 2500).`;
+        const result = await model.generateContent(prompt);
+        const generatedPrice = parseInt(result.response.text().replace(/\D/g, ''));
+        if (!isNaN(generatedPrice) && generatedPrice > 0) {
+          price = generatedPrice;
+        } else {
+          price = passengers * 500; // Fallback
+        }
+      } catch (aiError) {
+        console.error('AI Pricing Error:', aiError);
+        price = passengers * 500; // Fallback
+      }
     }
 
     const newBooking = await db.query(
