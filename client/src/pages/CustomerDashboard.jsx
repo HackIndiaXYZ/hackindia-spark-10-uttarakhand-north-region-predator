@@ -351,7 +351,15 @@ export default function CustomerDashboard() {
                 </div>
               )}
 
-              <button type="submit" className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 text-white px-4 py-4 text-sm font-black transition hover:bg-slate-800 shadow-xl shadow-slate-900/20">
+              <div className="mt-6 p-4 rounded-xl bg-orange-50 border border-orange-200/60 flex items-start gap-3 shadow-sm">
+                <MessageSquare className="size-5 text-orange-500 shrink-0 mt-0.5" />
+                <p className="text-xs font-medium text-slate-600 leading-relaxed">
+                  <strong className="text-slate-900 font-bold block mb-0.5">Price is an estimate</strong>
+                  Please message the driver after booking to discuss the final price and further details.
+                </p>
+              </div>
+
+              <button type="submit" className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 text-white px-4 py-4 text-sm font-black transition hover:bg-slate-800 shadow-xl shadow-slate-900/20">
                 Confirm Booking {packagePrice ? `(₹${packagePrice})` : ''} <Navigation className="size-4" fill="currentColor" />
               </button>
             </form>
